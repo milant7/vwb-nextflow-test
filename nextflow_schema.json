@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "https://raw.githubusercontent.com/milant7/vwb-nextflow-test/main/nextflow_schema.json",
+    "title": "VWB Nextflow Test Pipeline Parameters",
+    "description": "Schema for VWB Nextflow test pipeline",
+    "type": "object",
+    "definitions": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "description": "Path to input file or directory.",
+                    "help_text": "Path to a GCS bucket path or local file."
+                },
+                "outdir": {
+                    "type": "string",
+                    "description": "Path to output directory where results will be published.",
+                    "help_text": "Must be a valid GCS bucket path (gs://)."
+                },
+                "input_text": {
+                    "type": "string",
+                    "default": "Hello from VWB",
+                    "description": "A simple text message to include in the output.",
+                    "help_text": "Optional message string passed to the SAY_HELLO process."
+                }
+            }
+        },
+        "optional_parameters": {
+            "title": "Optional parameters",
+            "type": "object",
+            "description": "Optional configuration parameters.",
+            "properties": {
+                "max_cpus": {
+                    "type": "integer",
+                    "default": 4,
+                    "description": "Maximum number of CPUs to use per task.",
+                    "help_text": "Applies to all processes unless overridden."
+                },
+                "max_memory": {
+                    "type": "string",
+                    "default": "8.GB",
+                    "description": "Maximum memory to use per task.",
+                    "help_text": "Format: e.g. 8.GB, 16.GB"
+                },
+                "max_time": {
+                    "type": "string",
+                    "default": "2.h",
+                    "description": "Maximum time allowed per task.",
+                    "help_text": "Format: e.g. 2.h, 4.h"
+                },
+                "debug_mode": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable debug mode for verbose logging.",
+                    "help_text": "When true, pipeline outputs additional debug information."
+                },
+                "sample_ids": {
+                    "type": "array",
+                    "description": "List of sample IDs to process.",
+                    "help_text": "Provide as a JSON array e.g. [\"sample1\", \"sample2\"]"
+                }
+            }
+        }
+    },
+    "allOf": [
+        { "$ref": "#/definitions/input_output_options" },
+        { "$ref": "#/definitions/optional_parameters" }
+    ]
+}

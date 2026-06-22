@@ -3,6 +3,7 @@
 nextflow.enable.dsl=2
 
 process SAY_HELLO {
+    container 'ubuntu:22.04'
     publishDir params.outdir, mode: 'copy'
 
     input:

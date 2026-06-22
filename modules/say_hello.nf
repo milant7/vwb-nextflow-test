@@ -14,6 +14,6 @@ process SAY_HELLO {
 
     script:
     """
-    bash ${projectDir}/bin/helper.sh "${message}" > hello_output.txt
+    helper.sh "${message}" > hello_output.txt
     """
 }
